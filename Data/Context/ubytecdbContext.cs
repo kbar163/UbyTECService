@@ -95,25 +95,25 @@ namespace UbyTECService.Data.Context
                     .IsUnique();
 
                 entity.Property(e => e.UsuarioAdminAfi)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("usuario_admin_afi");
 
                 entity.Property(e => e.Activo).HasColumnName("activo");
 
                 entity.Property(e => e.Canton)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("canton");
 
                 entity.Property(e => e.CorreoElectronico)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("correo_electronico");
 
                 entity.Property(e => e.Distrito)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("distrito");
 
                 entity.Property(e => e.Nombre)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("nombre");
 
                 entity.Property(e => e.PasswordAdminAfi)
@@ -121,15 +121,15 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("password_admin_afi");
 
                 entity.Property(e => e.PrimerApellido)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("primer_apellido");
 
                 entity.Property(e => e.Provincia)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("provincia");
 
                 entity.Property(e => e.SegundoApellido)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("segundo_apellido");
             });
 
@@ -151,19 +151,19 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("cedula_admin_uby");
 
                 entity.Property(e => e.Canton)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("canton");
 
                 entity.Property(e => e.CorreoElectronico)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("correo_electronico");
 
                 entity.Property(e => e.Distrito)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("distrito");
 
                 entity.Property(e => e.Nombre)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("nombre");
 
                 entity.Property(e => e.PasswordAdminUby)
@@ -171,19 +171,19 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("password_admin_uby");
 
                 entity.Property(e => e.PrimerApellido)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("primer_apellido");
 
                 entity.Property(e => e.Provincia)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("provincia");
 
                 entity.Property(e => e.SegundoApellido)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("segundo_apellido");
 
                 entity.Property(e => e.UsuarioAdminUby)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("usuario_admin_uby");
             });
 
@@ -204,7 +204,7 @@ namespace UbyTECService.Data.Context
                 entity.Property(e => e.Activo).HasColumnName("activo");
 
                 entity.Property(e => e.Canton)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("canton");
 
                 entity.Property(e => e.ComentarioSolicitud)
@@ -212,19 +212,19 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("comentario_solicitud");
 
                 entity.Property(e => e.Correo)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("correo");
 
                 entity.Property(e => e.Distrito)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("distrito");
 
                 entity.Property(e => e.NombreComercio)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("nombre_comercio");
 
                 entity.Property(e => e.Provincia)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("provincia");
 
                 entity.Property(e => e.SinpeMovil)
@@ -281,15 +281,15 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("cedula_cliente");
 
                 entity.Property(e => e.Canton)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("canton");
 
                 entity.Property(e => e.CorreoElectronico)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("correo_electronico");
 
                 entity.Property(e => e.Distrito)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("distrito");
 
                 entity.Property(e => e.FechaNacimiento)
@@ -297,7 +297,7 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("fecha_nacimiento");
 
                 entity.Property(e => e.Nombre)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("nombre");
 
                 entity.Property(e => e.PasswordCliente)
@@ -305,19 +305,19 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("password_cliente");
 
                 entity.Property(e => e.PrimerApellido)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("primer_apellido");
 
                 entity.Property(e => e.Provincia)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("provincia");
 
                 entity.Property(e => e.SegundoApellido)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("segundo_apellido");
 
                 entity.Property(e => e.UsuarioCliente)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("usuario_cliente");
             });
 
