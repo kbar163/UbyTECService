@@ -21,6 +21,7 @@ namespace UbyTECService.Models.Generated
         public string Distrito { get; set; } = null!;
         public bool Activo { get; set; }
 
+        public virtual AfiliadoAdmin AfiliadoAdmin { get; set; } = null!;
         public virtual ICollection<AdminAfiTelefono> AdminAfiTelefonos { get; set; }
     }
 }

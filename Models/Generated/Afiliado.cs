@@ -7,7 +7,10 @@ namespace UbyTECService.Models.Generated
     {
         public Afiliado()
         {
+            AfiliadoAdmins = new HashSet<AfiliadoAdmin>();
             AfiliadoTelefonos = new HashSet<AfiliadoTelefono>();
+            Pedidos = new HashSet<Pedido>();
+            Productos = new HashSet<Producto>();
         }
 
         public string CedulaJuridica { get; set; } = null!;
@@ -22,6 +25,9 @@ namespace UbyTECService.Models.Generated
         public int Tipo { get; set; }
 
         public virtual TipoComercio TipoNavigation { get; set; } = null!;
+        public virtual ICollection<AfiliadoAdmin> AfiliadoAdmins { get; set; }
         public virtual ICollection<AfiliadoTelefono> AfiliadoTelefonos { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Producto> Productos { get; set; }
     }
 }

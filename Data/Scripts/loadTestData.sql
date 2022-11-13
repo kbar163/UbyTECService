@@ -1,3 +1,4 @@
+--Datos de prueba
 INSERT INTO ADMINISTRADOR_UBY
 VALUES
 ('304930544','Kevin', 'Barrantes', 'Cerdas','kabarrantes163@ubytec.com','kbar','password01','Cartago','Paraiso', 'Orosi');
