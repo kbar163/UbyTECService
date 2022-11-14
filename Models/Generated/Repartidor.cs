@@ -3,27 +3,24 @@ using System.Collections.Generic;
 
 namespace UbyTECService.Models.Generated
 {
-    public partial class Cliente
+    public partial class Repartidor
     {
-        public Cliente()
+        public Repartidor()
         {
-            ClienteTelefonos = new HashSet<ClienteTelefono>();
             Pedidos = new HashSet<Pedido>();
         }
 
-        public string CedulaCliente { get; set; } = null!;
+        public string UsuarioRepart { get; set; } = null!;
         public string Nombre { get; set; } = null!;
         public string PrimerApellido { get; set; } = null!;
         public string SegundoApellido { get; set; } = null!;
-        public DateTime FechaNacimiento { get; set; }
-        public string CorreoElectronico { get; set; } = null!;
-        public string UsuarioCliente { get; set; } = null!;
-        public string PasswordCliente { get; set; } = null!;
+        public string CorreoRepart { get; set; } = null!;
+        public string PasswordRepart { get; set; } = null!;
         public string Provincia { get; set; } = null!;
         public string Canton { get; set; } = null!;
         public string Distrito { get; set; } = null!;
+        public bool Disponible { get; set; }
 
-        public virtual ICollection<ClienteTelefono> ClienteTelefonos { get; set; }
         public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }

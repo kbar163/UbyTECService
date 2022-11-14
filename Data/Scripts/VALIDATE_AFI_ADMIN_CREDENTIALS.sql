@@ -1,0 +1,23 @@
+--Funcion creada en la base de datos ubytecdb
+--Entradas:
+--AFI_ADMIN_USR es un nombre de usuario a buscar en la tabla ADMINISTRADOR_AFILIADO
+--AFI_ADMIN_PSW es un password a buscar en la tabla de ADMINISTRADOR_AFILIADO
+--Salida: Un valor booleano
+--Proceso: Se selecciona de la tabla de ADMINISTRADOR_AFILIADO, el USUARIO_ADMIN_AFI y PASSWORD_ADMIN_AFI
+--que haga match con los parametros de entrada, si encuentra un par de valores a seleccionar, retorna True,
+--de lo contrario, retorna False.
+
+CREATE OR REPLACE FUNCTION VALIDATE_AFI_ADMIN_CREDENTIALS(AFI_ADMIN_USR VARCHAR(50),AFI_ADMIN_PSW VARCHAR(50))
+RETURNS BOOLEAN
+LANGUAGE 'plpgsql'
+
+AS
+$BODY$
+BEGIN
+	PERFORM ADMINISTRADOR_AFILIADO.USUARIO_ADMIN_AFI,ADMINISTRADOR_AFILIADO.PASSWORD_ADMIN_AFI
+	FROM ADMINISTRADOR_AFILIADO
+	WHERE ADMINISTRADOR_AFILIADO.USUARIO_ADMIN_AFI = AFI_ADMIN_USR
+	AND ADMINISTRADOR_AFILIADO.PASSWORD_ADMIN_AFI = AFI_ADMIN_PSW;
+	RETURN FOUND;
+END
+$BODY$;
