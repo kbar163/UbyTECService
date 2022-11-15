@@ -7,8 +7,6 @@ using UbyTECService.Models.Login;
 
 namespace UbyTECService.Data.Context
 {
-    //Contexto de base de datos generado por EntityFramework.Core. Contiene toda la informacion de las tablas en la base de datos y se encarga de mapear
-    //cada entidad a modelos de datos en forma de clases de C#, permitiendo el facil acceso y manipulacion de la informacion contenida en la base de datos. 
     public partial class ubytecdbContext : DbContext
     {
         public ubytecdbContext()
@@ -18,7 +16,6 @@ namespace UbyTECService.Data.Context
         public ubytecdbContext(DbContextOptions<ubytecdbContext> options)
             : base(options)
         {
-            
         }
 
         public virtual DbSet<AdminAfiTelefono> AdminAfiTelefonos { get; set; } = null!;
@@ -36,6 +33,7 @@ namespace UbyTECService.Data.Context
         public virtual DbSet<PedidoProducto> PedidoProductos { get; set; } = null!;
         public virtual DbSet<Producto> Productos { get; set; } = null!;
         public virtual DbSet<Repartidor> Repartidors { get; set; } = null!;
+        public virtual DbSet<RepartidorTelefono> RepartidorTelefonos { get; set; } = null!;
         public virtual DbSet<TipoComercio> TipoComercios { get; set; } = null!;
         public virtual DbSet<ValidateUbyAdmin> ValidateUbyAdmins {get; set; } = null!;
         public virtual DbSet<ValidateAfiAdmin> ValidateAfiAdmins {get; set; } = null!;
@@ -48,7 +46,6 @@ namespace UbyTECService.Data.Context
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseNpgsql("Server=ubytec-pg.postgres.database.azure.com;Database=ubytecdb;Port=5432;User Id=adminubytec;Password=Bases2022!;TrustServerCertificate=True;");
             }
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -599,6 +596,32 @@ namespace UbyTECService.Data.Context
                     .HasColumnName("segundo_apellido");
             });
 
+            modelBuilder.Entity<RepartidorTelefono>(entity =>
+            {
+                entity.HasKey(e => e.IdLinea)
+                    .HasName("repartidor_telefonos_pkey");
+
+                entity.ToTable("repartidor_telefonos");
+
+                entity.HasIndex(e => e.TelefonoRepart, "u_repartidor_tel")
+                    .IsUnique();
+
+                entity.Property(e => e.IdLinea).HasColumnName("id_linea");
+
+                entity.Property(e => e.TelefonoRepart)
+                    .HasMaxLength(8)
+                    .HasColumnName("telefono_repart");
+
+                entity.Property(e => e.UsuarioRepart)
+                    .HasMaxLength(50)
+                    .HasColumnName("usuario_repart");
+
+                entity.HasOne(d => d.UsuarioRepartNavigation)
+                    .WithMany(p => p.RepartidorTelefonos)
+                    .HasForeignKey(d => d.UsuarioRepart)
+                    .HasConstraintName("fk_reparttelefonos_repartidor");
+            });
+
             modelBuilder.Entity<TipoComercio>(entity =>
             {
                 entity.HasKey(e => e.IdTipo)
@@ -635,7 +658,6 @@ namespace UbyTECService.Data.Context
                 entity.Property(e => e.isValid)
                     .HasColumnName("validate_customer_credentials");
             });
-
 
             OnModelCreatingPartial(modelBuilder);
         }

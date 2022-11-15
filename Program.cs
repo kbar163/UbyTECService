@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IUbyAdminRepository,UbyAdminRepository>();
+builder.Services.AddScoped<IDeliverymanRepository,DeliverymanRepository>();
 
 //Middleware utilizado para habilitar politicas de CORS en los endpoints del REST API.
 builder.Services.AddCors(options =>

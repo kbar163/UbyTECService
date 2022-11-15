@@ -56,7 +56,7 @@ namespace UbyTECService.Controllers
         }
 
         [HttpDelete]
-        public ActionResult<ActionResponse> DeleteUbyAdmin(DeleteUbyAdminRequest delAdmin)
+        public ActionResult<ActionResponse> DeleteUbyAdmin(IdRequest delAdmin)
         {
             var response = _repository.DeleteUbyAdmin(delAdmin);
             return Ok(response);

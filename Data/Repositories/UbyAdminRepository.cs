@@ -60,12 +60,12 @@ namespace UbyTECService.Data.Repositories
         //Entrada: DeleteUbyAdminRequest delAdmin; Continene el id de  un administrador a eliminar en la base de datos
         //Proceso: Ejecuta el query de borrar haciendo uso del id, lo cual dispara un trigger que elimina todos los datos
         //relacionados al administrador en cascada.
-        public ActionResponse DeleteUbyAdmin(DeleteUbyAdminRequest delAdmin)
+        public ActionResponse DeleteUbyAdmin(IdRequest delAdmin)
         {
             var response = new ActionResponse();
             try
             {
-                var removeAdmin = _context.Database.ExecuteSqlRaw("DELETE FROM ADMINISTRADOR_UBY WHERE CEDULA_ADMIN_UBY = {0};",delAdmin.CedulaAdminUby);
+                var removeAdmin = _context.Database.ExecuteSqlRaw("DELETE FROM ADMINISTRADOR_UBY WHERE CEDULA_ADMIN_UBY = {0};",delAdmin.id);
                 response.actualizado = true;
                 response.mensaje = "Administrador Uby eliminado exitosamente";
             }
