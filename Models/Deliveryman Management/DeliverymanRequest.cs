@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace UbyTECService.Models.Generated
+namespace UbyTECService.Models.UbyAdminManagement
 {
-    public partial class Repartidor
+    //DTO utilizado para request de creacion y modificacion de administradores uby.
+    public class DeliverymanRequest
     {
-        public Repartidor()
-        {
-            Pedidos = new HashSet<Pedido>();
-            RepartidorTelefonos = new HashSet<RepartidorTelefono>();
-        }
-
         public string UsuarioRepart { get; set; } = null!;
         public string Nombre { get; set; } = null!;
         public string PrimerApellido { get; set; } = null!;
@@ -20,9 +12,7 @@ namespace UbyTECService.Models.Generated
         public string Provincia { get; set; } = null!;
         public string Canton { get; set; } = null!;
         public string Distrito { get; set; } = null!;
-        public bool Disponible { get; set; }
-
-        public virtual ICollection<Pedido> Pedidos { get; set; }
-        public virtual ICollection<RepartidorTelefono> RepartidorTelefonos { get; set; }
+        public List<string> Telefonos {get; set; } = null!;
+        public bool Disponible {get; set; }
     }
 }

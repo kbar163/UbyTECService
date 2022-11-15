@@ -11,7 +11,7 @@ namespace UbyTECService.Data.Interfaces
     {
         ActionResponse AddUbyAdmin(UbyAdminRequest newAdmin);
         ActionResponse ModifyUbyAdmin(UbyAdminRequest modAdmin);
-        ActionResponse DeleteUbyAdmin(DeleteUbyAdminRequest delAdmin);
+        ActionResponse DeleteUbyAdmin(IdRequest delAdmin);
         SingleUbyAdmin GetUbyAdminById(string id);
         MultiUbyAdmin GetAllUbyAdmin();
     }

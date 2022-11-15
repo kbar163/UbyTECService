@@ -27,3 +27,13 @@ INSERT INTO CLIENTE_TELEFONOS
 VALUES
 (DEFAULT,'333333333','55555555'),
 (DEFAULT,'444444444','66666666');
+
+INSERT INTO REPARTIDOR
+VALUES
+('herb82','Hernan','Barboza','Salguero','herbarboza@correo.com','kInf038n','San Jose','San Jose','San Jose',TRUE),
+('Messi10','Lionel','Messi','Cuccittini','leomessi@correo.com','ciuaUIBH38','San Jose','San Jose','San Jose',TRUE);
+
+INSERT INTO REPARTIDOR_TELEFONOS
+VALUES
+(DEFAULT,'herb82','78765456'),
+(DEFAULT,'Messi10','10101010');
