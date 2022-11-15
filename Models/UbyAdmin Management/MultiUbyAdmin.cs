@@ -6,7 +6,7 @@ namespace UbyTECService.Models.UbyAdminManagement
     public class MultiUbyAdmin
     {
         public bool exito { get; set; }
-        public List<AdministradorUby> admin { get; set; } = null!;
+        public List<AdminUbyDTO> admin { get; set; } = null!;
         
     }
 }

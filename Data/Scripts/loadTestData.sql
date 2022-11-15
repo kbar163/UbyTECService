@@ -37,3 +37,40 @@ INSERT INTO REPARTIDOR_TELEFONOS
 VALUES
 (DEFAULT,'herb82','78765456'),
 (DEFAULT,'Messi10','10101010');
+
+INSERT INTO TIPO_COMERCIO
+VALUES
+(DEFAULT,'Comida Rapida'),
+(DEFAULT,'Bar/Restaurante'),
+(DEFAULT,'Soda');
+
+INSERT INTO AFILIADO
+VALUES
+('234543675458','Kurger Bing','86576439','servicio@kurgerbing.com','San Jose','San Jose','Zapote','sin comentario',true,1),
+('347576803458','MacDonalz','86576439','servicio@macdonalz.com','San Jose','San Jose','Zapote','sin comentario',true,1);
+
+INSERT INTO AFILIADO_ADMIN
+VALUES
+('234543675458','bobbyb',true),
+('347576803458','warden',true);
+
+INSERT INTO PEDIDO
+VALUES
+(DEFAULT,5000,1,'333333333','San Jose','Montes de Oca','San Rafael','234543675458','11-15-22 14:05:06.789','CR7'),
+(DEFAULT,3750,3,'444444444','San Jose','Montes de Oca','Mercedes','347576803458','11-15-22 14:05:06.789','herb82');
+
+INSERT INTO CATEGORIA
+VALUES
+(DEFAULT,'Hamburguesa');
+
+INSERT INTO PRODUCTO
+VALUES
+(DEFAULT,'Guopper','https://media.istockphoto.com/id/927593762/photo/a-real-life-homemade-burger-what-hamburgers-really-look-like.jpg?s=612x612&w=0&k=20&c=GXg1R1u3VQqp2BrG03J_SM-tID8-yU0JUB3NU0s5E1I=',
+ 5000,'234543675458',1),
+(DEFAULT,'smolMac','https://media.istockphoto.com/id/176601160/photo/ugly-burger.jpg?s=612x612&w=0&k=20&c=8CbeBeKc0pjy1Yy_3rh3i_XJoD9Ao3YhQSraKFgxCvI=',
+ 3750,'347576803458',1);
+ 
+INSERT INTO PEDIDO_PRODUCTO
+VALUES
+(DEFAULT,1,1),
+(DEFAULT,2,2);

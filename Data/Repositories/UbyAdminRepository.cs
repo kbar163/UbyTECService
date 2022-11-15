@@ -4,6 +4,7 @@ using UbyTECService.Data.Interfaces;
 using UbyTECService.Models;
 using UbyTECService.Models.UbyAdminManagement;
 using UbyTECService.Models.Generated;
+using AutoMapper;
 
 namespace UbyTECService.Data.Repositories
 {
@@ -14,10 +15,12 @@ namespace UbyTECService.Data.Repositories
     public class UbyAdminRepository : IUbyAdminRepository
     {
         private readonly ubytecdbContext _context;
+        private readonly IMapper _mapper;
 
-        public UbyAdminRepository(ubytecdbContext context)
+        public UbyAdminRepository(ubytecdbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         //Entrada: UbyAdminRequest newAdmin; Continene los datos necesarios para crear un nuevo administrador en la base de datos
@@ -57,7 +60,7 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
-        //Entrada: DeleteUbyAdminRequest delAdmin; Continene el id de  un administrador a eliminar en la base de datos
+        //Entrada: IdRequest delAdmin; Continene el id de  un administrador a eliminar en la base de datos
         //Proceso: Ejecuta el query de borrar haciendo uso del id, lo cual dispara un trigger que elimina todos los datos
         //relacionados al administrador en cascada.
         public ActionResponse DeleteUbyAdmin(IdRequest delAdmin)
@@ -85,11 +88,21 @@ namespace UbyTECService.Data.Repositories
             var response = new MultiUbyAdmin();
             try
             {
-                var admin = _context.AdministradorUbies.Include(a => a.AdminUbyTelefonos).ToList(); 
+                var admin = _context.AdministradorUbies.Include(a => a.AdminUbyTelefonos).ToList();
+                var adminDTO = _mapper.Map<List<AdminUbyDTO>>(admin);
+                
                 if(admin.Count != 0)
-                {
+                {   
+                    for(int i = 0; i < adminDTO.Count; i++)
+                    {
+                        adminDTO[i].Telefonos = new List<string>();
+                        for(int j = 0; j < admin[i].AdminUbyTelefonos.Count; j++)
+                        {
+                            adminDTO[i].Telefonos.Add(admin[i].AdminUbyTelefonos.ElementAt(j).Telefono);
+                        }
+                    }
                     response.exito = true;
-                    response.admin = admin;
+                    response.admin = adminDTO;
                 }
                 else
                 {
@@ -115,11 +128,17 @@ namespace UbyTECService.Data.Repositories
             {
                 var admin = _context.AdministradorUbies.Include(a => a.AdminUbyTelefonos)
                             .Where(a => a.CedulaAdminUby == id)
-                            .FirstOrDefault<AdministradorUby>(); 
+                            .FirstOrDefault<AdministradorUby>();
                 if(admin != null)
                 {
+                    var adminDTO = _mapper.Map<AdminUbyDTO>(admin);
+                    adminDTO.Telefonos = new List<string>();
+                    foreach(AdminUbyTelefono element in admin.AdminUbyTelefonos.ToList())
+                    {
+                        adminDTO.Telefonos.Add(element.Telefono);
+                    }
                     response.exito = true;
-                    response.admin = admin;
+                    response.admin = adminDTO;
                 }
                 else
                 {
@@ -129,6 +148,7 @@ namespace UbyTECService.Data.Repositories
             catch(Exception e)
             {
                 response.exito = false;
+                Console.WriteLine(e.Message);
             }
             
             return response;

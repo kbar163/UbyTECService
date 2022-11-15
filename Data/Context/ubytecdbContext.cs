@@ -620,6 +620,7 @@ namespace UbyTECService.Data.Context
                     .WithMany(p => p.RepartidorTelefonos)
                     .HasForeignKey(d => d.UsuarioRepart)
                     .HasConstraintName("fk_reparttelefonos_repartidor");
+                
             });
 
             modelBuilder.Entity<TipoComercio>(entity =>
