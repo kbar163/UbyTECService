@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+using UbyTECService.Models.Generated;
 
-namespace UbyTECService.Models.Generated
+namespace UbyTECService.Models.UbyAdminManagement
 {
-    public partial class AdministradorUby
+    public partial class AdminUbyDTO
     {
-        public AdministradorUby()
-        {
-            AdminUbyTelefonos = new HashSet<AdminUbyTelefono>();
-        }
-
+        
         public string CedulaAdminUby { get; set; } = null!;
         public string Nombre { get; set; } = null!;
         public string PrimerApellido { get; set; } = null!;
@@ -20,6 +15,7 @@ namespace UbyTECService.Models.Generated
         public string Provincia { get; set; } = null!;
         public string Canton { get; set; } = null!;
         public string Distrito { get; set; } = null!;
-        public virtual ICollection<AdminUbyTelefono> AdminUbyTelefonos { get; set; }
+        public List<string> Telefonos {get; set; } = null!;
+        
     }
 }

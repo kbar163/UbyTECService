@@ -1,8 +1,8 @@
 namespace UbyTECService.Models.DeliveryManagement
 {
-    //DTO utilizado para request de creacion y modificacion de administradores uby.
-    public class DeliverymanRequest
+    public partial class DeliverymanDTO
     {
+
         public string UsuarioRepart { get; set; } = null!;
         public string Nombre { get; set; } = null!;
         public string PrimerApellido { get; set; } = null!;
@@ -12,7 +12,7 @@ namespace UbyTECService.Models.DeliveryManagement
         public string Provincia { get; set; } = null!;
         public string Canton { get; set; } = null!;
         public string Distrito { get; set; } = null!;
+        public bool Disponible { get; set; }
         public List<string> Telefonos {get; set; } = null!;
-        public bool Disponible {get; set; }
     }
 }

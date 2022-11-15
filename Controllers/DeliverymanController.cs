@@ -2,9 +2,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using UbyTECService.Data.Interfaces;
 using UbyTECService.Models;
-using UbyTECService.Models.Generated;
-using UbyTECService.Models.Login;
-using UbyTECService.Models.UbyAdminManagement;
+using UbyTECService.Models.DeliveryManagement;
 
 namespace UbyTECService.Controllers
 {

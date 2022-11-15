@@ -15,9 +15,12 @@ builder.Services.AddMvc()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IUbyAdminRepository,UbyAdminRepository>();
 builder.Services.AddScoped<IDeliverymanRepository,DeliverymanRepository>();
+builder.Services.AddScoped<IProductRepository,ProductRepository>();
+builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 
 //Middleware utilizado para habilitar politicas de CORS en los endpoints del REST API.
 builder.Services.AddCors(options =>

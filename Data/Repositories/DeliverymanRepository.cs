@@ -4,6 +4,8 @@ using UbyTECService.Data.Interfaces;
 using UbyTECService.Models;
 using UbyTECService.Models.UbyAdminManagement;
 using UbyTECService.Models.Generated;
+using UbyTECService.Models.DeliveryManagement;
+using AutoMapper;
 
 namespace UbyTECService.Data.Repositories
 {
@@ -14,10 +16,12 @@ namespace UbyTECService.Data.Repositories
     public class DeliverymanRepository : IDeliverymanRepository
     {
         private readonly ubytecdbContext _context;
+        private readonly IMapper _mapper;
 
-        public DeliverymanRepository(ubytecdbContext context)
+        public DeliverymanRepository(ubytecdbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         //Entrada: DeliverymanRequest newDeliveryman; Continene los datos necesarios para crear un nuevo repartidor en la base de datos
@@ -59,6 +63,7 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+
         //Entrada: IdRequest delDeliveryman; Continene el id de  un repartidor a eliminar en la base de datos
         //Proceso: Ejecuta el query de borrar haciendo uso del id, lo cual dispara un trigger que elimina todos los datos
         //relacionados al repartidor en cascada.
@@ -87,11 +92,23 @@ namespace UbyTECService.Data.Repositories
             var response = new MultiDeliveryman();
             try
             {
-                var repartidores = _context.Repartidors.Include(r => r.RepartidorTelefonos).ToList(); 
+                var repartidores = _context.Repartidors
+                .Include(r => r.RepartidorTelefonos).ToList();
+                 
                 if(repartidores.Count != 0)
                 {
+                    var repartidoresDTO = _mapper.Map<List<DeliverymanDTO>>(repartidores);
+
+                    for(int i = 0; i < repartidoresDTO.Count; i++)
+                    {
+                        repartidoresDTO[i].Telefonos = new List<string>();
+                        for(int j = 0; j < repartidores[i].RepartidorTelefonos.Count; j++)
+                        {
+                            repartidoresDTO[i].Telefonos.Add(repartidores[i].RepartidorTelefonos.ElementAt(j).TelefonoRepart);
+                        }
+                    }
                     response.exito = true;
-                    response.repartidores = repartidores;
+                    response.repartidores = repartidoresDTO;
                 }
                 else
                 {
@@ -115,13 +132,21 @@ namespace UbyTECService.Data.Repositories
             var response = new SingleDeliveryman();
             try
             {
-                var repartidor = _context.Repartidors.Include(r => r.RepartidorTelefonos)
-                            .Where(r => r.UsuarioRepart == id)
-                            .FirstOrDefault<Repartidor>(); 
+                var repartidor = _context.Repartidors
+                .Include(r => r.RepartidorTelefonos)
+                .Where(r => r.UsuarioRepart == id)
+                .FirstOrDefault<Repartidor>();
+
                 if(repartidor != null)
                 {
+                    var repartidorDTO = _mapper.Map<DeliverymanDTO>(repartidor);
+                    repartidorDTO.Telefonos = new List<string>();
+                    foreach(RepartidorTelefono element in repartidor.RepartidorTelefonos.ToList())
+                    {
+                        repartidorDTO.Telefonos.Add(element.TelefonoRepart);
+                    }
                     response.exito = true;
-                    response.repartidor = repartidor;
+                    response.repartidor = repartidorDTO;
                 }
                 else
                 {
@@ -175,5 +200,6 @@ namespace UbyTECService.Data.Repositories
             
             return response;
         }
+
     }
 }

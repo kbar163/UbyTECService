@@ -1,4 +1,5 @@
 using UbyTECService.Models;
+using UbyTECService.Models.DeliveryManagement;
 using UbyTECService.Models.Generated;
 using UbyTECService.Models.Generated;
 using UbyTECService.Models.UbyAdminManagement;
