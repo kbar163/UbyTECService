@@ -263,8 +263,6 @@ namespace UbyTECService.Data.Context
                     .HasMaxLength(50)
                     .HasColumnName("usuario_admin_afi");
 
-                entity.Property(e => e.Activo).HasColumnName("activo");
-
                 entity.Property(e => e.CedulaJuridica)
                     .HasMaxLength(12)
                     .HasColumnName("cedula_juridica");
