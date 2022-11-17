@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using UbyTECService.Data.Interfaces;
+using UbyTECService.Models;
 using UbyTECService.Models.ProductManagement;
 
 namespace UbyTECService.Controllers
@@ -24,12 +25,12 @@ namespace UbyTECService.Controllers
             _repository = repository;
         }
 
-        // [HttpPost]
-        // public ActionResult<ActionResponse> AddProduct(ProductRequest newProduct )
-        // {
-        //     var response = _repository.AddProduct(newProduct);
-        //     return Ok(response);
-        // }
+        [HttpPost]
+        public ActionResult<ActionResponse> AddProduct(ProductRequest newProduct )
+        {
+            var response = _repository.AddProduct(newProduct);
+            return Ok(response);
+        }
 
         [HttpGet("{id}")]
         public ActionResult<SingleProduct> GetDeliverymanById(int id)
@@ -45,18 +46,18 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
-        // [HttpPatch]
-        // public ActionResult<ActionResponse> ModifyProduct(ProductRequest modProduct )
-        // {
-        //     var response = _repository.ModifyProduct(modProduct);
-        //     return Ok(response);
-        // }
+        [HttpPatch]
+        public ActionResult<ActionResponse> ModifyProduct(ProductRequest modProduct )
+        {
+            var response = _repository.ModifyProduct(modProduct);
+            return Ok(response);
+        }
 
-        // [HttpDelete]
-        // public ActionResult<ActionResponse> DeleteProduct(IdRequest delProduct)
-        // {
-        //     var response = _repository.DeleteProduct(delProduct);
-        //     return Ok(response);
-        // }
+        [HttpDelete]
+        public ActionResult<ActionResponse> DeleteProduct(NumIdRequest delProduct)
+        {
+            var response = _repository.DeleteProduct(delProduct);
+            return Ok(response);
+        }
     }
 }

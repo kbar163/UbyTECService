@@ -9,9 +9,9 @@ namespace UbyTECService.Data.Interfaces
     //implementacion del repositorio que maneja la logica de manejo de productos de la solucion.
     public interface IProductRepository
     {
-        // ActionResponse AddProduct(ProductRequest newProduct);
-        // ActionResponse ModifyProduct(ProductRequest modProduct);
-        // ActionResponse DeleteProduct(IdRequest delProduct);
+        ActionResponse AddProduct(ProductRequest newProduct);
+        ActionResponse ModifyProduct(ProductRequest modProduct);
+        ActionResponse DeleteProduct(NumIdRequest delProduct);
         SingleProduct GetProductById(int id);
         MultiProduct GetAllProducts();
     }
