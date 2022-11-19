@@ -4,6 +4,7 @@ using UbyTECService.Models.Generated;
 using UbyTECService.Models.ProductManagement;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using UbyTECService.Models;
 
 namespace UbyTECService.Data.Repositories
 {
@@ -18,7 +19,49 @@ namespace UbyTECService.Data.Repositories
             _context = context;
             _mapper = mapper;
         }
-        
+
+        public ActionResponse AddProduct(ProductRequest newProduct)
+        {
+            var response = new ActionResponse();
+
+            try
+            {
+                var addProduct = _context.Database.ExecuteSqlRaw("CALL ADD_PRODUCT({0},{1},{2},{3},{4});",
+                    newProduct.NombreProducto,newProduct.UrlFoto,newProduct.Precio,newProduct.CedulaJuridica,
+                    newProduct.IdCategoria);
+                    response.actualizado = true;
+                    response.mensaje = "Producto creado exitosamente";
+
+            }
+            catch(Exception e)
+            {
+                response.actualizado = false;
+                response.mensaje = "Error al crear producto";
+            }
+
+            return response;
+        }
+
+        //Entrada: IdRequest delAdmin; Continene el id de  un producto a eliminar en la base de datos
+        //Proceso: Ejecuta el query de borrar haciendo uso del id.
+        public ActionResponse DeleteProduct(NumIdRequest delProduct)
+        {
+            var response = new ActionResponse();
+            try
+            {
+                var removeProduct = _context.Database.ExecuteSqlRaw("DELETE FROM PRODUCTO WHERE ID_PRODUCTO = {0};",delProduct.id);
+                response.actualizado = true;
+                response.mensaje = "Producto eliminado exitosamente";
+            }
+            catch(Exception e)
+            {
+                response.actualizado = false;
+                response.mensaje = "Error al eleminar producto";
+                Console.WriteLine(e.Message);
+            }
+            return response;
+        }
+
         //Proceso: Haciendo uso de EntityFramework.Core, obtiene todos los productos registrados en la base de datos.
         //Salida MultiProduct response; Contiene una propiedad booleana "exito" que indica si la operacion fue exitosa, y una propiedad lista
         //de Producto poblada con los objetos que representan los datos existentes en la base de datos.
@@ -83,6 +126,28 @@ namespace UbyTECService.Data.Repositories
                 response.exito = false;
             }
             
+            return response;
+        }
+
+        public ActionResponse ModifyProduct(ProductRequest modProduct)
+        {
+            var response = new ActionResponse();
+
+            try
+            {
+                var newProduct = _context.Database.ExecuteSqlRaw("CALL UPDATE_PRODUCT({0},{1},{2},{3});",
+                    modProduct.IdProducto,modProduct.NombreProducto,modProduct.UrlFoto,modProduct.Precio);
+                    response.actualizado = true;
+                    response.mensaje = "Producto actualizado exitosamente";
+
+            }
+            catch(Exception e)
+            {
+                response.actualizado = false;
+                response.mensaje = "Error al actualizar producto";
+                Console.WriteLine(e.Message);
+            }
+
             return response;
         }
     }
