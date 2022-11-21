@@ -8,6 +8,10 @@ using UbyTECService.Models.Generated;
 
 namespace UbyTECService.Data.Repositories
 {
+    //Implementacion de la logica para cada una de los endpoints expuesos en CustomerController,
+    //esta clase extiende la interfaz ICustomerRepository, e implementa los metodos relacionados
+    //a la manipulacion de datos necesaria para cumplir con los requerimientos funcionales
+    //de la aplicacion.
     public class CustomerRepository : ICustomerRepository
     {
         private readonly ubytecdbContext _context;
@@ -19,6 +23,9 @@ namespace UbyTECService.Data.Repositories
             _mapper = mapper;
         }
 
+        //Entrada: CustomerRequest newCustomer; Continene los datos necesarios para crear un nuevo cliente en la base de datos
+        //Proceso: Revisa la cantidad de numeros de telefono que el usuario quiere agregar y acorde a esto ejecuta el procedimiento
+        //almacenado correspondiente para crear un cliente en la base de datos.
         public ActionResponse AddCustomer(CustomerRequest newCustomer)
         {
             var response = new ActionResponse();
@@ -57,6 +64,9 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+        //Entrada: IdRequest delCustomer; Continene el id de  un cliente a eliminar en la base de datos
+        //Proceso: Ejecuta el query de borrar haciendo uso del id, lo cual dispara un trigger que elimina todos los datos
+        //relacionados al cliente en cascada.
         public ActionResponse DeleteCustomer(IdRequest delCustomer)
         {
             var response = new ActionResponse();
@@ -75,6 +85,10 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+        //Entrada: string id que representa el usuario de un cliente
+        //Proceso: Haciendo uso de EntityFramework.Core, obtiene un cliente registrado en la base de datos basado en el id.
+        //Salida: SingleCustomer response; Contiene una propiedad booleana "exito" que indica si la operacion fue exitosa, y un
+        //Repartidor que representa el dato del customer con el usuario que hace match con la entrada id.
         public SingleCustomer GetCustomerById(string id)
         {
             var response = new SingleCustomer();
@@ -110,6 +124,9 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+        //Entrada: CustomerRequest modCustomer; Continene los datos necesarios para modificar un cliente en la base de datos
+        //Proceso: Revisa la cantidad de numeros de telefono que el usuario quiere modificar y acorde a esto ejecuta el procedimiento
+        //almacenado correspondiente para modificar un cliente en la base de datos.
         public ActionResponse ModifyCustomer(CustomerRequest modCustomer)
         {
             var response = new ActionResponse();
