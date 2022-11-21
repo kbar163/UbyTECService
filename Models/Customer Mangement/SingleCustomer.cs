@@ -6,7 +6,7 @@ namespace UbyTECService.Models.CustomerManagement
     public class SingleCustomer
     {
         public bool exito { get; set; }
-        public CustomerRequest? customer { get; set; }
+        public CustomerRequest? cliente { get; set; }
         
     }
 }

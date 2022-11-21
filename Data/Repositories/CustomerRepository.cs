@@ -108,7 +108,7 @@ namespace UbyTECService.Data.Repositories
                         customerDTO.Telefonos.Add(element.Telefono);
                     }
                     response.exito = true;
-                    response.customer = customerDTO;
+                    response.cliente = customerDTO;
                 }
                 else
                 {
