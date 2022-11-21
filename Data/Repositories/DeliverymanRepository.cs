@@ -9,8 +9,8 @@ using AutoMapper;
 
 namespace UbyTECService.Data.Repositories
 {
-    //Implementacion de la logica para cada una de los endpoints expuesos en LoginController,
-    //esta clase extiende la interfaz ILoginRepository, e implementa los metodos relacionados
+    //Implementacion de la logica para cada una de los endpoints expuesos en DeliverymanController,
+    //esta clase extiende la interfaz IDeliverymanRepository, e implementa los metodos relacionados
     //a la manipulacion de datos necesaria para cumplir con los requerimientos funcionales
     //de la aplicacion.
     public class DeliverymanRepository : IDeliverymanRepository
