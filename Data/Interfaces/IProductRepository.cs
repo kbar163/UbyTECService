@@ -14,5 +14,6 @@ namespace UbyTECService.Data.Interfaces
         ActionResponse DeleteProduct(NumIdRequest delProduct);
         SingleProduct GetProductById(int id);
         MultiProduct GetAllProducts();
+        MultiProduct GetProductsByUser(string id);
     }
 }

@@ -32,17 +32,24 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<SingleProduct> GetDeliverymanById(int id)
+        [HttpGet("id/{id}")]
+        public ActionResult<SingleProduct> GetProductById(int id)
         {
             var response = _repository.GetProductById(id);
             return Ok(response);
         }
 
         [HttpGet]
-        public ActionResult<MultiProduct> GetAllDeliverymen()
+        public ActionResult<MultiProduct> GetAllProducts()
         {
             var response = _repository.GetAllProducts();
+            return Ok(response);
+        }
+
+        [HttpGet ("usr/{usr}")]
+        public ActionResult<MultiProduct> GetProductsByUser(string usr)
+        {
+            var response = _repository.GetProductsByUser(usr);
             return Ok(response);
         }
 

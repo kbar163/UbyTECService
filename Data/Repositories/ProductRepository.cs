@@ -20,6 +20,8 @@ namespace UbyTECService.Data.Repositories
             _mapper = mapper;
         }
 
+        //Entrada: ProductRequest newProduct; Continene los datos necesarios para crear un nuevo producto en la base de datos
+        //Proceso: ejecuta el procedimiento almacenado correspondiente para crear un producto en la base de datos.
         public ActionResponse AddProduct(ProductRequest newProduct)
         {
             var response = new ActionResponse();
@@ -129,6 +131,41 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+        public MultiProduct GetProductsByUser(string id)
+        {
+            var response = new MultiProduct();
+            try
+            {
+                var afiliadoAdmin = _context.AfiliadoAdmins.Find(id);
+                var products = _context.Productos.ToList().Where(p => p.CedulaJuridica == afiliadoAdmin.CedulaJuridica).ToList();
+                var productsDTO = _mapper.Map<List<ProductDTO>>(products);
+
+                
+
+                if(products.Count != 0)
+                {
+                    foreach(ProductDTO element in productsDTO)
+                    {
+                        element.NombreCategoria = _context.Categoria.Find(element.IdCategoria).NombreCategoria;
+                    }
+                    response.exito = true;
+                    response.productos = productsDTO;
+                }
+                else
+                {
+                    response.exito = false;
+                }
+            }
+            catch(Exception e)
+            {
+                response.exito = false;
+            }
+            
+            return response;
+        }
+
+        //Entrada: ProductRequest newProduct; Continene los datos necesarios para modificar un producto en la base de datos
+        //Proceso: ejecuta el procedimiento almacenado correspondiente para modificar un producto en la base de datos.
         public ActionResponse ModifyProduct(ProductRequest modProduct)
         {
             var response = new ActionResponse();
