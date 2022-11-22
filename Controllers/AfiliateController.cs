@@ -47,6 +47,13 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
+        [HttpGet("provincia/{province}")]
+        public ActionResult<MultiAfiliate> GetAfiliateByProvince(string province)
+        {
+            var response = _repository.GetAfiliatesByProvince(province);
+            return Ok(response);
+        }
+
         [HttpGet]
         public ActionResult<MultiAfiliate> GetAllAfiliates()
         {
