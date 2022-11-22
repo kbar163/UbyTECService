@@ -64,6 +64,39 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+
+        //Proceso: Haciendo uso de EntityFramework.Core, obtiene todos los categotias registradass en la base de datos.
+        //Salida MultiCategory response; Contiene una propiedad booleana "exito" que indica si la operacion fue exitosa, y una propiedad lista
+        //de Category poblada con los objetos que representan los datos existentes en la base de datos.
+        public MultiCategory GetAllCategories()
+        {
+            var response = new MultiCategory();
+            try
+            {
+                var categories = _context.Categoria.ToList();
+                var categoriesDTO = _mapper.Map<List<Category>>(categories);
+
+                
+
+                if(categories.Count != 0)
+                {
+                    
+                    response.exito = true;
+                    response.categorias = categoriesDTO;
+                }
+                else
+                {
+                    response.exito = false;
+                }
+            }
+            catch(Exception e)
+            {
+                response.exito = false;
+            }
+            
+            return response;
+        }
+
         //Proceso: Haciendo uso de EntityFramework.Core, obtiene todos los productos registrados en la base de datos.
         //Salida MultiProduct response; Contiene una propiedad booleana "exito" que indica si la operacion fue exitosa, y una propiedad lista
         //de Producto poblada con los objetos que representan los datos existentes en la base de datos.
@@ -139,8 +172,6 @@ namespace UbyTECService.Data.Repositories
                 var afiliadoAdmin = _context.AfiliadoAdmins.Find(id);
                 var products = _context.Productos.ToList().Where(p => p.CedulaJuridica == afiliadoAdmin.CedulaJuridica).ToList();
                 var productsDTO = _mapper.Map<List<ProductDTO>>(products);
-
-                
 
                 if(products.Count != 0)
                 {

@@ -53,6 +53,13 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
+        [HttpGet ("category")]
+        public ActionResult<MultiCategory> GetAllCategories()
+        {
+            var response = _repository.GetAllCategories();
+            return Ok(response);
+        }
+
         [HttpPatch]
         public ActionResult<ActionResponse> ModifyProduct(ProductRequest modProduct )
         {
