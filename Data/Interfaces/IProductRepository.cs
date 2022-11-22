@@ -15,5 +15,6 @@ namespace UbyTECService.Data.Interfaces
         SingleProduct GetProductById(int id);
         MultiProduct GetAllProducts();
         MultiProduct GetProductsByUser(string id);
+        MultiCategory GetAllCategories();
     }
 }
