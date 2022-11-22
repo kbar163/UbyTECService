@@ -22,6 +22,7 @@ builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 builder.Services.AddScoped<IAfiliateRepository,AfiliateRepository>();
 builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
+builder.Services.AddScoped<ICommerceTypeRepository,CommerceTypeRepository>();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //Middleware utilizado para habilitar politicas de CORS en los endpoints del REST API.
 builder.Services.AddCors(options =>
