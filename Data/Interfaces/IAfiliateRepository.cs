@@ -12,6 +12,7 @@ namespace UbyTECService.Data.Interfaces
         ActionResponse ModifyAfiAdmin(AdminAfiDTO modAfiliate);
         SingleAfiliate GetAfiliateById(string id);
         MultiAfiliate GetAllAfiliates();
+        MultiAfiliate GetAfiliatesByProvince(string province);
         ActionResponse ReplaceAfiAdmin(ReplaceAdminRequest newAdmin);
     }
     

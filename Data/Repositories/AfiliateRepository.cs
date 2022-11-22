@@ -296,6 +296,64 @@ namespace UbyTECService.Data.Repositories
             return response;
             
         }
+
+        public MultiAfiliate GetAfiliatesByProvince(string province)
+        {
+             var response = new MultiAfiliate();
+            try
+            {
+                var afiliates = _context.Afiliados
+                .Include(a => a.AfiliadoAdmins)
+                .Include(a => a.AfiliadoTelefonos)
+                .Where(a => a.Provincia == province)
+                .ToList();
+
+                if (afiliates.Count != 0)
+                {
+                    var afiliadosDTO = _mapper.Map<List<AfiliateDTO>>(afiliates);
+                    response.afiliados = new List<AfiliateData>();
+
+                    for (int i = 0; i < afiliadosDTO.Count; i++)
+                    {
+                        afiliadosDTO[i].Telefonos = new List<string>();
+                        var adminUser = afiliates.ElementAt(i).AfiliadoAdmins.ElementAt(0).UsuarioAdminAfi;
+                        var admin = _context.AdministradorAfiliados
+                            .Include(a => a.AdminAfiTelefonos)
+                            .Where(a => a.UsuarioAdminAfi == adminUser)
+                            .FirstOrDefault<AdministradorAfiliado>();
+                        var adminDTO = _mapper.Map<AdminAfiDTO>(admin);
+                        adminDTO.Telefonos = new List<string>();
+
+                        foreach (AfiliadoTelefono element in afiliates[i].AfiliadoTelefonos)
+                        {
+                            afiliadosDTO[i].Telefonos.Add(element.Telefono);
+                        }
+
+                        foreach (AdminAfiTelefono element in admin.AdminAfiTelefonos)
+                        {
+                            adminDTO.Telefonos.Add(element.Telefono);
+                        }
+
+                        var data = new AfiliateData();
+                        data.Administrador = adminDTO;
+                        data.Comercio = afiliadosDTO[i];
+                        response.afiliados.Add(data);
+                    }
+                    response.exito = true;
+                }
+                else
+                {
+                    response.exito = false;
+                }
+            }
+            catch (Exception e)
+            {
+                response.exito = false;
+                Console.WriteLine(e.Message);
+            }
+
+            return response;
+        }
     }
 
     
