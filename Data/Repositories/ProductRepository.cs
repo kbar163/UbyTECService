@@ -140,8 +140,6 @@ namespace UbyTECService.Data.Repositories
                 var products = _context.Productos.ToList().Where(p => p.CedulaJuridica == afiliadoAdmin.CedulaJuridica).ToList();
                 var productsDTO = _mapper.Map<List<ProductDTO>>(products);
 
-                
-
                 if(products.Count != 0)
                 {
                     foreach(ProductDTO element in productsDTO)
