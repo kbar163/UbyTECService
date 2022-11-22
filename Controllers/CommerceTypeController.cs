@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using UbyTECService.Data.Interfaces;
+using UbyTECService.Models;
 using UbyTECService.Models.CommerceTypeManagement;
 
 
@@ -30,6 +31,27 @@ namespace UbyTECService.Controllers
         public ActionResult<MultiCommerceType> GetAllCommerceTypes()
         {
             var response = _repository.GetAllCommerceTypes();
+            return Ok(response);
+        }
+        
+        [HttpPost]
+        public ActionResult<ActionResponse> AddCustomer(CommerceTypeRequest newCommerce)
+        {
+            var response = _repository.AddCommerceType(newCommerce);
+            return Ok(response);
+        }
+
+        [HttpPatch]
+        public ActionResult<ActionResponse> ModCustomer(ModCommerceRequest newCommerce)
+        {
+            var response = _repository.ModifyCommerceType(newCommerce);
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        public ActionResult<ActionResponse> DelCustomer(NumIdRequest delCommerce)
+        {
+            var response = _repository.DeleteCommereceType(delCommerce);
             return Ok(response);
         }
     }

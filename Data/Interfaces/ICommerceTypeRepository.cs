@@ -9,6 +9,10 @@ namespace UbyTECService.Data.Interfaces
     {
         
         MultiCommerceType GetAllCommerceTypes();
+        ActionResponse AddCommerceType(CommerceTypeRequest newCommerce);
+        ActionResponse ModifyCommerceType(ModCommerceRequest newCommerce);
+
+        ActionResponse DeleteCommereceType(NumIdRequest delCommerce);
         
     }
 }
