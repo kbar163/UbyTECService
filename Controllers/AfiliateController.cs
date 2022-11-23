@@ -33,6 +33,7 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
+        [EnableCors("Policy")]
         [HttpPost("afiadmin/replace")]
         public ActionResult<ActionResponse> ReplaceAfiAdmin(ReplaceAdminRequest newAfiAdmin )
         {
