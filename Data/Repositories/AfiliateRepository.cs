@@ -354,6 +354,31 @@ namespace UbyTECService.Data.Repositories
 
             return response;
         }
+
+        public IdRequest GetAfiliateByUsr(string id)
+        {
+            var response = new IdRequest();
+            try
+            {
+                var afiliate = _context.AfiliadoAdmins.Where(a => a.UsuarioAdminAfi == id).ToList();
+
+                if (afiliate != null)
+                {
+                    response.id = afiliate[0].CedulaJuridica;
+                    
+                }
+                else
+                {
+                    response.id = "Error";
+                }
+            }
+            catch (Exception e)
+            {
+                response.id = "Error";
+            }
+
+            return response;
+        }
     }
 
     

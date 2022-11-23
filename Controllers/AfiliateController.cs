@@ -54,12 +54,21 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
+        [HttpGet("usr/{usr}")]
+        public ActionResult<IdRequest> GetAfiliateByUsr(string usr)
+        {
+            var response = _repository.GetAfiliateByUsr(usr);
+            return Ok(response);
+        }
+
         [HttpGet]
         public ActionResult<MultiAfiliate> GetAllAfiliates()
         {
             var response = _repository.GetAllAfiliates();
             return Ok(response);
         }
+
+        
 
         [HttpPatch]
         public ActionResult<ActionResponse> ModifyAfiliate(AfiliateDTO modAfiliate )
