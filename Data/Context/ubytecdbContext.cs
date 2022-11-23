@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using UbyTECService.Models.Generated;
 using UbyTECService.Models.Login;
+using UbyTECService.Models.OrderManagement;
 
 namespace UbyTECService.Data.Context
 {
@@ -38,6 +39,7 @@ namespace UbyTECService.Data.Context
         public virtual DbSet<ValidateUbyAdmin> ValidateUbyAdmins {get; set; } = null!;
         public virtual DbSet<ValidateAfiAdmin> ValidateAfiAdmins {get; set; } = null!;
         public virtual DbSet<ValidateCustomer> ValidateCustomers {get; set; } = null!;
+        public virtual DbSet<OrderID> PostInsertID {get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -656,6 +658,13 @@ namespace UbyTECService.Data.Context
                 entity.HasNoKey();
                 entity.Property(e => e.isValid)
                     .HasColumnName("validate_customer_credentials");
+            });
+
+            modelBuilder.Entity<OrderID>(entity =>
+            {
+                entity.HasNoKey();
+                entity.Property(e => e.IdPedido)
+                    .HasColumnName("id_pedido");
             });
 
             OnModelCreatingPartial(modelBuilder);

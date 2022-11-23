@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using UbyTECService.Data.Interfaces;
+using UbyTECService.Models;
 using UbyTECService.Models.OrderManagement;
 
 namespace UbyTECService.Controllers
@@ -10,7 +11,7 @@ namespace UbyTECService.Controllers
     //ApiController identifica a la clase como un controlador en el framework.
     //OrderController se encarga de manejar los endpoints que permiten la gestion de pedidos.
     //Route especifica la ruta para este controlador. En este caso local:
-    //http://localhost:5068/api/pedido
+    //http://localhost:5068/api/manage/pedido
 
     [Route("api/manage/pedido")]
     [ApiController]
@@ -24,12 +25,12 @@ namespace UbyTECService.Controllers
             _repository = repository;
         }
 
-        // [HttpPost]
-        // public ActionResult<ActionResponse> AddOrder(OrderRequest newOrder )
-        // {
-        //     var response = _repository.AddOrder(newOrder);
-        //     return Ok(response);
-        // }
+        [HttpPost]
+        public ActionResult<ActionResponse> AddOrder(OrderRequest newOrder )
+        {
+            var response = _repository.AddOrder(newOrder);
+            return Ok(response);
+        }
 
         [HttpGet("{id}")]
         public ActionResult<SingleOrder> GetOrderById(int id)

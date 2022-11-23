@@ -1,3 +1,4 @@
+using UbyTECService.Models;
 using UbyTECService.Models.OrderManagement;
 
 namespace UbyTECService.Data.Interfaces
@@ -6,7 +7,7 @@ namespace UbyTECService.Data.Interfaces
     //implementacion del repositorio que maneja la logica de manejo de pedidos de la solucion.
     public interface IOrderRepository
     {
-        // ActionResponse AddOrder(OrderRequest newOrder);
+        ActionResponse AddOrder(OrderRequest newOrder);
         // ActionResponse ModifyOrder(OrderRequest modOrder);
         // ActionResponse DeleteOrder(IdRequest delOrder);
         SingleOrder GetOrderById(int id);
