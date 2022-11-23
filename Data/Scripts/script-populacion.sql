@@ -22,3 +22,8 @@ VALUES
 INSERT INTO ADMINISTRADOR_UBY
 VALUES
 ('304930544','Kevin', 'Barrantes', 'Cerdas','kabarrantes163@ubytec.com','kbar','password01','Cartago','Paraíso', 'Orosi');
+
+INSERT INTO ADMIN_UBY_TELEFONOS
+VALUES
+(DEFAULT,'304930544','89734502'),
+(DEFAULT,'304930544','88888888');
