@@ -2,11 +2,16 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using UbyTECService.Data.Context;
 using UbyTECService.Data.Interfaces;
+using UbyTECService.Models;
 using UbyTECService.Models.Generated;
 using UbyTECService.Models.OrderManagement;
 
 namespace UbyTECService.Data.Repositories
 {
+    //Implementacion de la logica para cada una de los endpoints expuesos en OrderController,
+    //esta clase extiende la interfaz IOrderRepository, e implementa los metodos relacionados
+    //a la manipulacion de datos necesaria para cumplir con los requerimientos funcionales
+    //de la aplicacion.
     public class OrderRepository : IOrderRepository
     {
         private readonly ubytecdbContext _context;
@@ -16,6 +21,49 @@ namespace UbyTECService.Data.Repositories
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        //Entrada: OrderRequest newOrder; Continene los datos necesarios para crear un nuevo pedido en la base de datos
+        //Proceso: Revisa la cantidad y precio de productos que el usuario quiere ordenar en us pedido y acorde a esto calcula el valor del monto con 5% de
+        //impuesto de servicio, agrega una nueva orden a la base de datos y agrega los productos a la tabla intermedia que relaciona las ordenes con los
+        //productos.
+        //Salida: ActionResponse response; Contiene un booleano que representa si la accion fue exitosa o fallida y un string mensaje.
+        public ActionResponse AddOrder(OrderRequest newOrder)
+        {
+            var response = new ActionResponse();
+            double totalPreTax = 0;
+
+            try
+            {
+                foreach(OrderRequestProduct element in newOrder.Productos)
+                {
+                    totalPreTax += element.PrecioProducto*element.Cantidad;
+                }
+
+                double tax = totalPreTax * 0.05;
+                double totalPostTax = totalPreTax + tax;
+
+                var idPedido = _context.PostInsertID.FromSqlRaw("INSERT INTO PEDIDO VALUES (DEFAULT,{0},1,{1},{2},{3},{4},{5},{6}) RETURNING ID_PEDIDO;",
+                totalPostTax,newOrder.CedulaCliente,newOrder.Provincia,newOrder.Canton,newOrder.Distrito,
+                newOrder.CedulaJuridica,newOrder.Fecha).ToList();
+                
+                foreach(OrderRequestProduct element in newOrder.Productos)
+                {
+                    for(int quantity = 0; quantity < element.Cantidad; quantity++)
+                    {
+                        _context.Database.ExecuteSqlRaw("INSERT INTO PEDIDO_PRODUCTO VALUES(DEFAULT,{0},{1});",idPedido[0].IdPedido,element.IdProducto);
+                    }
+                    
+                }
+                response.actualizado = true;
+                response.mensaje = "Pedido creado exitosamente";
+            }
+            catch(Exception e)
+            {
+                response.mensaje = "Error al crear pedido";
+                Console.WriteLine(e.Message);
+            }
+            return response;
         }
 
         //Proceso: Haciendo uso de EntityFramework.Core, obtiene todos los pedidos registrados en la base de datos.
