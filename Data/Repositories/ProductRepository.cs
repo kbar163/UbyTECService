@@ -203,8 +203,8 @@ namespace UbyTECService.Data.Repositories
 
             try
             {
-                var newProduct = _context.Database.ExecuteSqlRaw("CALL UPDATE_PRODUCT({0},{1},{2},{3});",
-                    modProduct.IdProducto,modProduct.NombreProducto,modProduct.UrlFoto,modProduct.Precio);
+                var newProduct = _context.Database.ExecuteSqlRaw("CALL UPDATE_PRODUCT({0},{1},{2},{3},{4});",
+                    modProduct.IdProducto,modProduct.NombreProducto,modProduct.UrlFoto,modProduct.Precio,modProduct.IdCategoria);
                     response.actualizado = true;
                     response.mensaje = "Producto actualizado exitosamente";
 

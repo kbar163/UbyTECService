@@ -8,6 +8,8 @@ namespace UbyTECService.Data.Interfaces
     public interface IOrderRepository
     {
         ActionResponse AddOrder(OrderRequest newOrder);
+        ActionResponse OrderReceived(NumIdRequest received);
+        ActionResponse AssignOrder(AssignOrder order);
         // ActionResponse ModifyOrder(OrderRequest modOrder);
         // ActionResponse DeleteOrder(IdRequest delOrder);
         SingleOrder GetOrderById(int id);

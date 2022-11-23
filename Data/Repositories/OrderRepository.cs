@@ -66,6 +66,27 @@ namespace UbyTECService.Data.Repositories
             return response;
         }
 
+        //Entrada: AssignOrder order; Continene los datos necesarios para asignar un repartidor a un pedido en la base de datos
+        //Proceso: Llama al procedimiento almacenado que asigna repartidores a pedidos y modifica el objeto de respuesta de acuerdo al resultado del procedimiento.
+        //Salida: ActionResponse response; Contiene un booleano que representa si la accion fue exitosa o fallida y un string mensaje.
+        public ActionResponse AssignOrder(AssignOrder order)
+        {
+            var response = new ActionResponse();
+
+            try
+            {
+                _context.Database.ExecuteSqlRaw("CALL ASSIGN_DELIVERY({0},{1},{2},{3});",order.Id,order.Provincia,order.Canton,order.Distrito);
+                response.actualizado = true;
+                response.mensaje = "Orden asignada exitosamente";
+            }
+            catch
+            {
+                response.mensaje = "Error al asignar orden";
+            }
+
+            return response;
+        }
+
         //Proceso: Haciendo uso de EntityFramework.Core, obtiene todos los pedidos registrados en la base de datos.
         //Salida MultiOrder response; Contiene una propiedad booleana "exito" que indica si la operacion fue exitosa, y una propiedad lista
         //de OrderDTO poblada con los objetos que representan los datos existentes en la base de datos.
@@ -149,6 +170,27 @@ namespace UbyTECService.Data.Repositories
                 Console.WriteLine(e.Message);
             }
             
+            return response;
+        }
+
+        //Entrada: OrderReceived received; Continene los datos necesarios para terminar el ciclo de un pedido en la base de datos
+        //Proceso: Llama al procedimiento almacenado que finaliza el ciclo del pedido y modifica el objeto de respuesta de acuerdo al resultado del procedimiento.
+        //Salida: ActionResponse response; Contiene un booleano que representa si la accion fue exitosa o fallida y un string mensaje.
+        public ActionResponse OrderReceived(NumIdRequest received)
+        {
+            var response = new ActionResponse();
+
+            try
+            {
+                _context.Database.ExecuteSqlRaw("CALL CONFIRM_ORDER({0});",received.id);
+                response.actualizado = true;
+                response.mensaje = "Orden terminada exitosamente";
+            }
+            catch
+            {
+                response.mensaje = "Error al terminar orden";
+            }
+
             return response;
         }
     }
