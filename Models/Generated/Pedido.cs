@@ -19,7 +19,7 @@ namespace UbyTECService.Models.Generated
         public string Distrito { get; set; } = null!;
         public string CedulaJuridica { get; set; } = null!;
         public DateTime FechaPedido { get; set; }
-        public string UsuarioRepart { get; set; } = null!;
+        public string? UsuarioRepart { get; set; }
 
         public virtual Cliente CedulaClienteNavigation { get; set; } = null!;
         public virtual Afiliado CedulaJuridicaNavigation { get; set; } = null!;
