@@ -32,6 +32,20 @@ namespace UbyTECService.Controllers
             return Ok(response);
         }
 
+        [HttpPost("asignar")]
+        public ActionResult<ActionResponse> AssignOrder(AssignOrder order )
+        {
+            var response = _repository.AssignOrder(order);
+            return Ok(response);
+        }
+
+        [HttpPost("confirmar")]
+        public ActionResult<ActionResponse> OrderReceived(NumIdRequest received )
+        {
+            var response = _repository.OrderReceived(received);
+            return Ok(response);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<SingleOrder> GetOrderById(int id)
         {
