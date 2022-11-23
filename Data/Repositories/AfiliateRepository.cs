@@ -260,8 +260,6 @@ namespace UbyTECService.Data.Repositories
             }
 
             return response;
-            
-            
         }
 
         public ActionResponse ReplaceAfiAdmin(ReplaceAdminRequest newAdmin)
